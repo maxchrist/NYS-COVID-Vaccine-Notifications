@@ -1,5 +1,5 @@
 # NYS-COVID-Vaccine-Notifications
-This code was created in February 2021 in order to repeatedly check the NYS COVID Vaccination website every 5 seconds. It send emails to a predetermined list of people, notifying them when a vaccination site which previously had no openings, is updated with new openings. This program is meant to run continuously on a machine. Annoyingly, since NYS updates the website structure every now and then, this code needs to be updated accordingly. However, after vaccines began to become widely available, this project was abandoned.
+This code was created in February 2021 in order to repeatedly check the NYS COVID Vaccination website ``` https://am-i-eligible.covid19vaccine.health.ny.gov``` every 5 seconds. It send emails to a predetermined list of people, notifying them when a vaccination site which previously had no openings, is updated with new openings. This program is meant to run continuously on a machine. Annoyingly, since NYS updates the website structure every now and then, this code needs to be updated accordingly. However, after vaccines began to become widely available, this project was abandoned.
 
 # Requirements
 Install Beautifulsoup 4 using:
