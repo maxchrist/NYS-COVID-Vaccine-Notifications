@@ -52,28 +52,28 @@ while True:
     html_soup = BeautifulSoup(innerHtml, 'html.parser')
     soup = html_soup.find_all('td')
     # Verify that the website correctly loaded the table of sites
-    if len(soup) > 0 and len(soup) % 3 == 0:
+    if len(soup) > 0 and len(soup) % 4 == 0:
         # Populate a dictionary of sites and availabilities
         city_dict = {}
-        for i in range(0, len(soup), 3):
-            city_dict[soup[i].string] = [soup[i + 1].string, soup[i + 2].string]
+        for i in range(0, len(soup), 4):
+            city_dict[soup[i].string] = [soup[i + 1].string, soup[i + 3].string]
 
         # Cycle through each site and verify check if it has newly become available
         for site in city_dict:
             # Get the three conditions for sending an email
-            currAvailable = city_dict[site][1] == 'Appointments Available'
+            currAvailable = city_dict[site][1] == 'Yes'
             if first_iter:
                 prevNotAvail = False
             # This covers possibility that they add a new site
             elif site not in city_dict_glob:
                 prevNotAvail = True
             else:
-                prevNotAvail = city_dict_glob[site][1] != 'Appointments Available'
+                prevNotAvail = city_dict_glob[site][1] != 'Yes'
             notSpecialSite = not (site[0:2] == '**')
 
             #  Send an email and print output to console
             if currAvailable and prevNotAvail and notSpecialSite:
-                outputText = 'Appointments Available in ' + site + '. Go to ' + link + ' immediately.'
+                outputText = 'New Appointments Available in ' + site + '. Go to ' + link + ' immediately.'
                 sendEmail(outputText)
                 print(outputText)
                 found_appointment = True
@@ -83,5 +83,5 @@ while True:
 
     # If nothing was found, or the website wasn't loaded properly, print to console.
     if not found_appointment:
-        print('No Appointments Found')
+        print('No New Appointments Found')
     first_iter = False
